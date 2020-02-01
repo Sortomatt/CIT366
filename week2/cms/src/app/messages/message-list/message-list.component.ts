@@ -7,9 +7,9 @@ import { Message } from '../message.model';
 })
 export class MessageListComponent implements OnInit {
   messages: Message[] = [
-    new Message( 1, 'Rrrrobotnik ROCK', 'where did I go WRONG with you?!', 'Rrrrrobotnik'),
-    new Message( 2, 'Brrrring, Brrring', 'Robotnik PHONE!', 'Robotnik PHONE'),
-    new Message( 3, 'MICE', 'I never should of made mice!', 'Rrrrrobotnik'),
+    new Message( 1, 'Test Message', 'This is only a test', 'Test-bot'),
+    new Message( 2, 'Another Test', 'A secondary test', 'Test-bot'),
+    new Message( 3, 'A third', 'This concludes our test', 'Test-bot'),
 
 
   ];
