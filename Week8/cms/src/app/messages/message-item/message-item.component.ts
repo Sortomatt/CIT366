@@ -9,16 +9,21 @@ import { Contact } from 'src/app/contacts/contact.model';
   styleUrls: ['./message-item.component.css']
 })
 export class MessageItemComponent implements OnInit {
-
   @Input() message: Message;
-  messageSender: string = '';
-  canEdit: boolean = false;
+  messageSender;
+  canEdit = false;
+  contact: Contact;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    let contact: Contact = this.contactService.getContact(this.message.sender);
-    this.messageSender = contact.name;
+    console.log(this.message);
+    this.contactService.getContact(this.message.id)
+      .subscribe(res => {
+        this.contact = res.contact;
+      });
+    console.log(this.contact);
+    this.messageSender = this.contact.name;
   }
 
 }

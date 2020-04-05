@@ -14,8 +14,8 @@ export class ContactEditComponent implements OnInit {
   contact: Contact = null;
   groupContacts: Contact[] = [];
   originalContact: Contact;
-  editMode: boolean = false;
-  hasGroup: boolean = false;
+  editMode = false;
+  hasGroup = false;
   invalidGroupContact: boolean;
 
   constructor( private contactService: ContactService,
@@ -33,15 +33,18 @@ export class ContactEditComponent implements OnInit {
             this.editMode = false;
             return;
           }
-          this.originalContact = this.contactService.getContact(this.id);
+          this.contactService.getContact(this.id)
+          .subscribe(res => {
+            this.originalContact = res.contact;
+          });
           if (this.originalContact === undefined || this.originalContact === null) {
             this.editMode = false;
             return;
           }
           this.editMode = true;
-          if (this.contact.hasOwnProperty('group')) {
-            this.contact.group = JSON.parse(JSON.stringify(this.originalContact.group));
-            this.groupContacts = this.contact.group.slice();
+          if (this.contact.group && this.contact.group.length > 0) {
+            this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
+            // this.groupContacts = this.contact.group.slice();
           }
         }
       );
